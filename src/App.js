@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { BrowserRouter, Navigate, Outlet, Route, Routes } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import AdminDashboard from "./components/admin/AdminDashboard";
+import AdminLogin from "./components/admin/authentication/AdminLogin";
+import AddScheme from "./components/admin/pages/AddScheme";
+import AddUserType from "./components/admin/pages/AddUserType";
+import AddCaste from "./components/admin/pages/AddCaste";
+import Header from "./components/layout/Header";
+import AuthContext, { CustomContext } from "./context/AuthContext";
+import MemberLogin from "./components/member/authentication/MemberLogin";
+import MemberRegister from "./components/member/authentication/MemberRegister";
+import Schemes from "./components/all-schemes/Schemes";
+import Home from "./components/home/Home";
+import MatchingSchemes from "./components/member/pages/MatchingSchemes";
+import Apply from "./components/member/ui/Apply";
+import MyApplications from "./components/member/pages/MyApplications";
+import ManageApplications from "./components/admin/pages/ManageApplications";
 
-function App() {
+export const TOAST_PROP = { position: 'top-center', hideProgressBar: true };
+
+function AuthenticatedRoute() {
+  const context = CustomContext();
+  if (context.isAuthenticated && context.isAuthenticated !== null) {
+    return <Outlet />
+  } else {
+    return <Navigate to={"/"} />
+  }
+}
+
+export default function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <BrowserRouter>
+        <AuthContext>
+          <ToastContainer />
+          <Header />
+          <Routes>
+            <Route path="/" element={<Home/>} />
+            <Route path="/all-schemes" element={<Schemes/>} />
+            <Route path="/admin/login" element={<AdminLogin />} />
+
+
+            <Route path="/member/login" element={<MemberLogin />} />
+            <Route path="/member/register" element={<MemberRegister />} />
+            <Route path="/member/matching-schemes" element={<MatchingSchemes />} />
+            <Route path="/member/applications" element={<MyApplications />} />
+
+            {/* private routes */}
+            <Route path="/admin" element={<AuthenticatedRoute />}>
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="dashboard/add-scheme" element={<AddScheme />} />
+              <Route path="dashboard/add-types" element={<AddUserType />} />
+              <Route path="dashboard/add-caste" element={<AddCaste />} />
+              <Route path="dashboard/applications" element={<ManageApplications />} />
+            </Route>
+
+          </Routes>
+        </AuthContext>
+      </BrowserRouter>
     </div>
   );
 }
-
-export default App;

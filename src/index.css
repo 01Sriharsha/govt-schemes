@@ -1,13 +1,77 @@
-body {
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400&display=swap');
+
+html{
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  font-family: 'Inter', sans-serif !important;
+  scroll-behavior: smooth !important;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+:root {
+  --text-primary: #ee7724;
+  --text-secondary: #b44593;
+}
+
+.bg-color {
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593) !important;
+}
+
+.bg-color-s{
+  background: #b44593 !important;
+}
+
+.text-p {
+  color: var(--text-primary) !important;
+}
+
+.header-nav  a , .logout{
+  padding: 0 !important;
+  margin: 0.5rem 0.5rem !important;
+  color: black !important;
+  border-bottom: 1px solid transparent !important;
+}
+.header-nav a:hover , .logout:hover{
+  color: var(--text-secondary) !important;
+  border-bottom: 1px solid var(--text-secondary) !important;
+}
+
+.text-s{
+  color: var(--text-secondary) !important;
+}
+
+.admin-actions a{
+  color: black !important;
+  text-decoration: none !important;
+}
+.admin-actions a:hover{
+  color: var(--text-primary) !important;
+  text-decoration: underline !important;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: white !important; 
+}
+ 
+/* Handle */ 
+ ::-webkit-scrollbar-thumb {
+  background: linear-gradient(to right, #ee7724, #d8363a, #dd3675, #b44593) !important; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: gray !important; 
+}
+
+/* disbale input number arrows */
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    margin: 0; 
 }
