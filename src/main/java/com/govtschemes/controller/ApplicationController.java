@@ -52,7 +52,7 @@ public class ApplicationController {
         return new ResponseEntity<>("Application removed successfully!!", HttpStatus.OK);
     }
 
-    @GetMapping("/applications/{applicationId}/download/documents")
+    @GetMapping("/applications/{applicationId}/documents/download")
     public ResponseEntity<?> downloadFile(@PathVariable Long applicationId, HttpServletResponse response) throws IOException {
         byte[] file = applicationService.getSingleApplication(applicationId).getDocuments();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(file);

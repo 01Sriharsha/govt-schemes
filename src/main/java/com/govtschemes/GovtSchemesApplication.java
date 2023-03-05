@@ -18,6 +18,7 @@ import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.Random;
+import java.util.UUID;
 
 @SpringBootApplication
 public class GovtSchemesApplication implements CommandLineRunner {
@@ -51,12 +52,7 @@ public class GovtSchemesApplication implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        Member member = memberRepository.findById(488L)
-                .orElseThrow(() -> new RuntimeException("User Not Found"));
-        Scheme scheme = schemeRepository.findById(2)
-                .orElseThrow(() -> new RuntimeException("Scheme Not Found"));
-        System.out.println("Scheme : " + applicationRepository.existsByScheme(scheme));
-        System.out.println("Member : " + applicationRepository.existsByMember(member));
-        System.out.println("appId : " + LocalDate.now().getYear() + "" + new Random().nextLong(9999 , 99999));
+        String s = UUID.randomUUID().toString().split("-")[0];
+        System.out.println(s.toUpperCase());
     }
 }

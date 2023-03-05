@@ -1,8 +1,5 @@
 package com.govtschemes.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,23 +11,22 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Application {
+public class Query {
 
     @Id
     private Long id;
 
-    private String status;
+    @Column(length = 2000)
+    private String message;
 
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    @Lob
-    private byte[] documents;
+    @Column(length = 2000)
+    private String reply;
 
     @ManyToOne(fetch = FetchType.LAZY , cascade = CascadeType.ALL)
+    @JoinColumn(name = "scheme_id")
     private Scheme scheme;
 
-
-    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "member_id")
     private Member member;
-
 }

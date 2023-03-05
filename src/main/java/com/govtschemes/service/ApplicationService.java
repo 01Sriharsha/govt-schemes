@@ -57,8 +57,12 @@ public class ApplicationService {
     public Application updateApplication(Long applicationId , Application application){
         Application existingApplication = applicationRepository.findById(applicationId)
                 .orElseThrow(() -> new RuntimeException("Application not found"));
-        existingApplication.setStatus(application.getStatus());
-        return applicationRepository.save(existingApplication);
+        if(existingApplication.getStatus().equals("pending")){
+            existingApplication.setStatus(application.getStatus());
+            return applicationRepository.save(existingApplication);
+        }else{
+            throw new RuntimeException("Application already " + existingApplication.getStatus());
+        }
     }
 
     public void deleteApplication(Long applicationId){
@@ -69,6 +73,5 @@ public class ApplicationService {
         }else{
             throw new RuntimeException("Application already " + application.getStatus());
         }
-        
     }
 }

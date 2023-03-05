@@ -45,6 +45,7 @@ public class SchemeService {
     }
 
     public void deleteScheme(Integer schemeId) {
+        System.out.println(schemeId);
         Scheme scheme = schemeRepository.findById(schemeId)
                 .orElseThrow(() -> new RuntimeException("Scheme not found with the provided scheme id"));
         schemeRepository.delete(scheme);

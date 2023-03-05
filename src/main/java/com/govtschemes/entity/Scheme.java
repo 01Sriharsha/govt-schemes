@@ -1,11 +1,14 @@
 package com.govtschemes.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.List;
 
 @Entity
 @Getter
@@ -38,4 +41,12 @@ public class Scheme {
     private String documents;
 
     private String status;
+
+    @OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY , orphanRemoval = true , mappedBy = "scheme")
+    @JsonIgnore
+    private List<Application> application;
+
+    @OneToMany(cascade = CascadeType.REMOVE , fetch = FetchType.LAZY , orphanRemoval = true , mappedBy = "scheme")
+    @JsonIgnore
+    private List<Query> query;
 }
