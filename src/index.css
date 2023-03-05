@@ -24,6 +24,10 @@ html{
   color: var(--text-primary) !important;
 }
 
+.header{
+  min-height: 10vh !important;
+}
+
 .header-nav  a , .logout{
   padding: 0 !important;
   margin: 0.5rem 0.5rem !important;
@@ -37,6 +41,13 @@ html{
 
 .text-s{
   color: var(--text-secondary) !important;
+}
+
+.btn-p{
+  background-color: transparent !important;
+  color : #b44593 !important;
+  border: 0 !important;
+  outline: 2px solid #b44593 !important;
 }
 
 .admin-actions a{

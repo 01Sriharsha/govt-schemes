@@ -1,7 +1,8 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { Container } from 'react-bootstrap';
+import { toast } from 'react-toastify';
 import { getMatchingScheme } from '../../../api/memberService'
-import { CustomContext } from '../../../context/AuthContext'
+import { TOAST_PROP } from '../../../App';
 import SchemeCard from '../../all-schemes/SchemeCard';
 
 export default function MatchingSchemes() {
@@ -10,15 +11,15 @@ export default function MatchingSchemes() {
 
   const memberData = JSON.parse(sessionStorage.getItem('user'))
 
-  
+
   useEffect(() => {
     getMatchingScheme(memberData).then(res => {
-      console.log(res);
       setSchemes(res.data)
     }).catch(err => {
       console.log(err);
+      toast.error("Failed to load schemes!!", TOAST_PROP)
     })
-  }, [])
+  }, [memberData])
 
 
   return (

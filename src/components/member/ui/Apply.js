@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { Button, FormControl, FormLabel, FormText, Modal, Table } from 'react-bootstrap'
+import { Button, FormControl, FormText, Modal, Table } from 'react-bootstrap'
+import { HiOutlineUpload } from 'react-icons/hi';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { uploadFile } from '../../../api/memberService';
@@ -19,6 +20,10 @@ export default function Apply(props) {
     }
 
     function handleSubmit() {
+        if (file === null) {
+            toast.info("Please upload the required documents!!", TOAST_PROP)
+            return;
+        }
         const memberId = context?.user?.id;
         toast.promise(uploadFile(memberId, props.scheme.id, file), {
             pending: "Uploading..."
@@ -34,17 +39,18 @@ export default function Apply(props) {
             }).catch(err => {
                 console.log(err);
                 toast.error(err.response.data ? err.response.data : `Failed to submit the application`, TOAST_PROP)
+                console.clear();
             })
+        setFile(null);
     }
 
-    console.log(props.scheme);
     return (
         <Modal
             show={props.show}
             onHide={props.toggle}
             backdrop="static"
             keyboard={false}
-            size="md"
+            size="lg"
             aria-labelledby="contained-modal-title-vcenter"
             centered
         >
@@ -52,25 +58,35 @@ export default function Apply(props) {
                 <Modal.Title>Apply for : {props?.scheme?.title}</Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <Table className=''>
+                <Table>
                     <thead>
-                        <tr className='w-100'>
+                        <tr className='w-100 text-center'>
                             <th>Scheme Id</th>
-                            <th>Required Documnets</th>
+                            <th>Required Documents</th>
                             <th></th>
                         </tr>
 
                     </thead>
-                    <tbody className=''>
-                        <tr className='w-100'>
-                            <td className=''>{props.scheme.id}</td>
-                            <td>{props.scheme.documents}</td>
+                    <tbody className='text-capitalize'>
+                        <tr className='text-center'>
                             <td>
-                                <Button htmlFor="doc" className='btn-sm bg-color border-0' as={'label'}>Upload</Button>
-                                <FormControl id="doc" type='file'
-                                    style={{ display: 'none' }}
-                                    onChange={handleDocChange}
-                                />
+                                <div className='d-flex justify-content-center'>{props.scheme.id}</div>
+                            </td>
+                            <td className='px-3'>{props.scheme.documents}</td>
+                            <td>
+                                <div className='d-flex justify-content-center'>
+                                    <Button as={'label'}
+                                        htmlFor="doc"
+                                        className='btn-sm bg-color border-0 d-flex align-items-center gap-1 justify-content-center w-100'
+                                    >
+                                        <span>Upload</span>
+                                        <HiOutlineUpload size={'1.1rem'} />
+                                    </Button>
+                                    <FormControl id="doc" type='file'
+                                        style={{ display: 'none' }}
+                                        onChange={handleDocChange}
+                                    />
+                                </div>
                             </td>
                         </tr>
                     </tbody>

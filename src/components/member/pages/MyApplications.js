@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { Button, Card, Container, Table } from 'react-bootstrap';
-import { HiOutlineUpload } from 'react-icons/hi';
+import { Button, Container, Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { deleteApplication, getAllApplications } from '../../../api/memberService'
 import { TOAST_PROP } from '../../../App';
@@ -35,10 +34,10 @@ export default function MyApplications() {
     return (
         <Container>
             <div className='my-3'>
-                <h1 className='text-center my-3'>Your Applications</h1>
-                <Table>
+                <h1 className='text-center my-4 text-s'>Your Applications</h1>
+                <Table responsive>
                     <thead>
-                        <tr>
+                        <tr className='text-center'>
                             <th>Application Id</th>
                             <th>Scheme Title</th>
                             <th>Applicant Name</th>
@@ -47,16 +46,19 @@ export default function MyApplications() {
                         </tr>
                     </thead>
                     <tbody>
-                        {applications.map(application => (
-                            <tr className='text-capitalize'>
-                                <td>{application.id}</td>
+                        {applications.map((application , index) => (
+                            <tr className='text-capitalize text-center' key={index}>
+                                <td className='fw-semibold'>{application.id}</td>
                                 <td>{application.scheme.title}</td>
                                 <td>{application.member.name}</td>
                                 <td>{application.status}</td>
                                 <td>
-                                    <Button className='btn-sm d-flex gap-1 align-items-center' onClick={() => handleDelete(application.id)}>
-                                        <span>Download</span>
-                                        <HiOutlineUpload />
+                                    <Button
+                                        variant='secondary'
+                                        className='btn-sm d-flex gap-1 align-items-center'
+                                        onClick={() => handleDelete(application.id)}
+                                    >
+                                        Delete
                                     </Button>
                                 </td>
                             </tr>

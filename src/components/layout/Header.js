@@ -18,7 +18,7 @@ export default function Header() {
     const toggle = () => setShow(!show);
 
     return (
-        <Navbar expand="md" className='navbar-light bg-light shadow' sticky='top'>
+        <Navbar expand="md" className='header navbar-light bg-light shadow' sticky='top'>
             <Container fluid>
                 <Navbar.Brand as={Link} to="/" className='text-p fw-bolder'>Govt Schemes</Navbar.Brand>
                 <Navbar.Toggle aria-controls="navbarScroll" />

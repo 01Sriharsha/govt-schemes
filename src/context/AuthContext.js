@@ -40,10 +40,14 @@ export default function AuthContext({ children }) {
             sessionStorage.setItem("user", JSON.stringify(res.data?.user))
             setIsAuthenticated(true);
             setUser(JSON.parse(sessionStorage.getItem("user")))
-            navigate((pathname.includes("/admin/login")) ? "/admin/dashboard" : "/member/dashboard")
+            navigate(
+                (pathname.includes("/admin/login"))
+                    ? "/admin/dashboard"
+                    : "/member/matching-schemes"
+            )
         }).catch(err => {
             console.log(err);
-            toast.error(err?.response?.data , TOAST_PROP)
+            toast.error(err?.response?.data, TOAST_PROP)
         })
 
     }

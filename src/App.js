@@ -15,6 +15,8 @@ import MatchingSchemes from "./components/member/pages/MatchingSchemes";
 import Apply from "./components/member/ui/Apply";
 import MyApplications from "./components/member/pages/MyApplications";
 import ManageApplications from "./components/admin/pages/ManageApplications";
+import MyQueries from "./components/member/pages/MyQueries";
+import ManageQueries from "./components/admin/pages/ManageQueries";
 
 export const TOAST_PROP = { position: 'top-center', hideProgressBar: true };
 
@@ -35,23 +37,29 @@ export default function App() {
           <ToastContainer />
           <Header />
           <Routes>
-            <Route path="/" element={<Home/>} />
-            <Route path="/all-schemes" element={<Schemes/>} />
+            <Route path="/" element={<Home />} />
+            <Route path="/all-schemes" element={<Schemes />} />
             <Route path="/admin/login" element={<AdminLogin />} />
-
-
             <Route path="/member/login" element={<MemberLogin />} />
             <Route path="/member/register" element={<MemberRegister />} />
-            <Route path="/member/matching-schemes" element={<MatchingSchemes />} />
-            <Route path="/member/applications" element={<MyApplications />} />
 
             {/* private routes */}
+
+            {/* Member Routes */}
+            <Route path="/member" element={<AuthenticatedRoute />}>
+              <Route path="matching-schemes" element={<MatchingSchemes />} />
+              <Route path="applications" element={<MyApplications />} />
+              <Route path="queries" element={<MyQueries />} />
+            </Route>
+
+            {/* Admin Routes */}
             <Route path="/admin" element={<AuthenticatedRoute />}>
               <Route path="dashboard" element={<AdminDashboard />} />
               <Route path="dashboard/add-scheme" element={<AddScheme />} />
               <Route path="dashboard/add-types" element={<AddUserType />} />
               <Route path="dashboard/add-caste" element={<AddCaste />} />
               <Route path="dashboard/applications" element={<ManageApplications />} />
+              <Route path="dashboard/queries" element={<ManageQueries />} />
             </Route>
 
           </Routes>

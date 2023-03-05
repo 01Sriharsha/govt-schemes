@@ -18,8 +18,6 @@ export default function Schemes() {
         })
     }, [])
 
-    console.log(schemes);
-
     return (
         <Container className='p-3'>
             <div>

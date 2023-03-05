@@ -12,6 +12,7 @@ export default function AdminDashboard() {
                     <Button as={Link} to="/admin/dashboard/add-types" className='bg-color-s border-0'>Add User Type</Button>
                     <Button as={Link} to="/admin/dashboard/add-caste" className='bg-color-s border-0'>Add Caste</Button>
                     <Button as={Link} to="/admin/dashboard/applications" className='bg-color-s border-0'>Manage Applications</Button>
+                    <Button as={Link} to="/admin/dashboard/queries" className='bg-color-s border-0'>Manage Queries</Button>
                 </div>
             </div>
         </Container>
