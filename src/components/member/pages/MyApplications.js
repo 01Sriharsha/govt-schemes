@@ -1,21 +1,27 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Table } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 import { toast } from 'react-toastify';
-import { deleteApplication, getAllApplications } from '../../../api/memberService'
+import { deleteApplication, getAllApllicationsByMemberID, getAllApplications } from '../../../api/memberService'
 import { TOAST_PROP } from '../../../App';
+import { CustomContext } from '../../../context/AuthContext';
 
 export default function MyApplications() {
+
+    const context = CustomContext();
+
+    const memberId = context?.user?.id
 
     const [applications, setApplications] = useState([]);
 
     useEffect(() => {
-        getAllApplications().then(res => {
+        getAllApllicationsByMemberID(memberId).then(res => {
             setApplications(res.data)
         }).catch(err => {
             console.log(err);
             toast.error("Failed to load your applications!!")
         })
-    }, [])
+    }, [memberId])
 
     function handleDelete(id) {
         toast.promise(deleteApplication(id), {
@@ -31,6 +37,17 @@ export default function MyApplications() {
             })
     }
 
+    if (applications?.length === 0) {
+        return (
+            <div
+                className='d-flex justify-content-center align-items-center flex-column'
+                style={{ height: '80vh' }}
+            >
+                <h1>No Applications!!</h1>
+                <h4 className='my-2'><Link to={"/member/matching-schemes"} className="text-s">Click Here to apply one!</Link></h4>
+            </div>
+        )
+    }
     return (
         <Container>
             <div className='my-3'>
@@ -46,7 +63,7 @@ export default function MyApplications() {
                         </tr>
                     </thead>
                     <tbody>
-                        {applications.map((application , index) => (
+                        {applications.map((application, index) => (
                             <tr className='text-capitalize text-center' key={index}>
                                 <td className='fw-semibold'>{application.id}</td>
                                 <td>{application.scheme.title}</td>

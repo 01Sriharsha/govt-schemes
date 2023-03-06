@@ -45,8 +45,8 @@ export default function Header() {
                                         )
                                 ) : (
                                     <>
-                                        <Nav.Link as={Link} to={"/"}>About Us</Nav.Link>
-                                        <Nav.Link as={Link} to={"/"}>Contact Us</Nav.Link>
+                                        <Nav.Link as={Link} to={"/about"}>About Us</Nav.Link>
+                                        <Nav.Link as={Link} to={"/contact"}>Contact Us</Nav.Link>
                                     </>
                                 )
                             }

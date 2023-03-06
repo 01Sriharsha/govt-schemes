@@ -1,21 +1,26 @@
 import React, { useEffect, useState } from 'react'
 import { Button, Container, Table } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import { deleteQuery, getAllQueries } from '../../../api/memberService';
+import { deleteQuery, getAllQueries, getAllQueriesByMemberID } from '../../../api/memberService';
 import { TOAST_PROP } from '../../../App';
+import { CustomContext } from '../../../context/AuthContext';
 
 export default function MyQueries() {
+
+    const context = CustomContext();
+
+    const memberId = context?.user?.id
 
     const [queries, setQueries] = useState([]);
 
     useEffect(() => {
-        getAllQueries().then(res => {
+        getAllQueriesByMemberID(memberId).then(res => {
             setQueries(res.data)
         }).catch(err => {
             console.log(err);
             toast.error("Failed to load all queries!!", TOAST_PROP)
         })
-    }, [])
+    }, [memberId])
 
     function handleDelete(id) {
         toast.promise(deleteQuery(id), {
@@ -32,6 +37,16 @@ export default function MyQueries() {
             })
     }
 
+    if (queries?.length === 0) {
+        return (
+            <div
+                className='d-flex justify-content-center align-items-center'
+                style={{ height: '80vh' }}
+            >
+                <h1>No Queries</h1>
+            </div>
+        )
+    }
     return (
         <Container>
             <div className='my-3'>

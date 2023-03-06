@@ -44,6 +44,11 @@ export const uploadFile = (memberId, schemeId, file) => {
 //Query API's
 export const getAllQueries = () => apiClient.get(`/queries`)
 
+export const getAllQueriesByMemberID = (memberId) => apiClient.get(`/members/${memberId}/queries`)
+
+export const getAllApllicationsByMemberID = (memberId) =>
+    apiClient.get(`/members/${memberId}/applications`)
+
 export const createNewQuery = (memberId, schemeId, queryData) =>
     apiClient.post(`/members/${memberId}/schemes/${schemeId}/queries`, queryData)
 

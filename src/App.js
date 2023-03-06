@@ -17,6 +17,8 @@ import MyApplications from "./components/member/pages/MyApplications";
 import ManageApplications from "./components/admin/pages/ManageApplications";
 import MyQueries from "./components/member/pages/MyQueries";
 import ManageQueries from "./components/admin/pages/ManageQueries";
+import AboutUs from "./components/home/AboutUs";
+import ContactUs from "./components/home/ContactUs";
 
 export const TOAST_PROP = { position: 'top-center', hideProgressBar: true };
 
@@ -38,6 +40,8 @@ export default function App() {
           <Header />
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/about" element={<AboutUs />} />
+            <Route path="/contact" element={<ContactUs />} />
             <Route path="/all-schemes" element={<Schemes />} />
             <Route path="/admin/login" element={<AdminLogin />} />
             <Route path="/member/login" element={<MemberLogin />} />

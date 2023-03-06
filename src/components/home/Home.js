@@ -11,16 +11,16 @@ export default function Home() {
                 <Carousel.Item>
                     <img
                         className="d-block w-100 rounded"
-                        src={scheme1}
-                        alt="First slide"
+                        src={scheme2}
+                        alt="Second slide"
                         style={{ height: '75vh' }}
                     />
                 </Carousel.Item>
                 <Carousel.Item>
                     <img
                         className="d-block w-100 rounded"
-                        src={scheme2}
-                        alt="Second slide"
+                        src={scheme1}
+                        alt="First slide"
                         style={{ height: '75vh' }}
                     />
                 </Carousel.Item>
