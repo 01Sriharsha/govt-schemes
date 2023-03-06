@@ -1,9 +1,11 @@
 package com.govtschemes;
 
 import com.govtschemes.entity.Member;
+import com.govtschemes.entity.Query;
 import com.govtschemes.entity.Scheme;
 import com.govtschemes.repository.ApplicationRepository;
 import com.govtschemes.repository.MemberRepository;
+import com.govtschemes.repository.QueryRepository;
 import com.govtschemes.repository.SchemeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
@@ -50,9 +52,16 @@ public class GovtSchemesApplication implements CommandLineRunner {
         };
     }
 
+
+    @Autowired
+    private QueryRepository queryRepository;
     @Override
     public void run(String... args) throws Exception {
-        String s = UUID.randomUUID().toString().split("-")[0];
-        System.out.println(s.toUpperCase());
+        Member member = memberRepository.findById(488L).get();
+        List<Query> allByMember = queryRepository.findAllByMember(member);
+        System.out.println(allByMember.toString());
+        System.out.println(allByMember);
+
+        applicationRepository.findAllByMember(member).forEach(e-> System.out.println(e.getId()));
     }
 }

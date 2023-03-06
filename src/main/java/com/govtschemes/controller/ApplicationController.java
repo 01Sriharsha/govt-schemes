@@ -26,6 +26,10 @@ public class ApplicationController {
     public ResponseEntity<?> retrieveAllApplications() {
         return new ResponseEntity<>(applicationService.getAllApplications(), HttpStatus.OK);
     }
+    @GetMapping("/members/{memberId}/applications")
+    public ResponseEntity<?> retrieveAllApplicationsByMember(@PathVariable Long memberId) {
+        return new ResponseEntity<>(applicationService.getAllApplicationsByMember(memberId), HttpStatus.OK);
+    }
 
     @GetMapping("/applications/{applicationId}")
     public ResponseEntity<?> retrieveSingleApplication(@PathVariable Long applicationId) {

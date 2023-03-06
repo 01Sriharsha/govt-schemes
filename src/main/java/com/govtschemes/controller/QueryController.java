@@ -20,6 +20,11 @@ public class QueryController {
         return new ResponseEntity<>(queryService.getAllQueries(), HttpStatus.OK);
     }
 
+    @GetMapping("/members/{memberId}/queries")
+    public ResponseEntity<?> retrieveAllQueriesByMember(@PathVariable Long memberId) {
+        return new ResponseEntity<>(queryService.getAllQueriesByMember(memberId), HttpStatus.OK);
+    }
+
     @GetMapping("/queries/{queryId}")
     public ResponseEntity<?> retrieveSingleQuery(@PathVariable Long queryId) {
         return new ResponseEntity<>(queryService.getSingleQuery(queryId), HttpStatus.OK);

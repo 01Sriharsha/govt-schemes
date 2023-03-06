@@ -35,6 +35,12 @@ public class ApplicationService {
                 .orElseThrow(()->new RuntimeException("Application not found"));
     }
 
+    public List<Application> getAllApplicationsByMember(Long memberId){
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+        return applicationRepository.findAllByMember(member);
+    }
+
     public Application createApplication(Long memberId , Integer schemeId , MultipartFile file) throws IOException {
         Member member = memberRepository.findById(memberId)
                 .orElseThrow(() -> new RuntimeException("User Not Found"));

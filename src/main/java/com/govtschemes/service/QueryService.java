@@ -1,5 +1,6 @@
 package com.govtschemes.service;
 
+import com.govtschemes.entity.Application;
 import com.govtschemes.entity.Member;
 import com.govtschemes.entity.Query;
 import com.govtschemes.entity.Scheme;
@@ -30,6 +31,12 @@ public class QueryService {
 
     public Query getSingleQuery(Long queryId) {
         return queryRepository.findById(queryId).orElseThrow(() -> new RuntimeException("Query not found"));
+    }
+
+    public List<Query> getAllQueriesByMember(Long memberId){
+        Member member = memberRepository.findById(memberId)
+                .orElseThrow(() -> new RuntimeException("User Not Found"));
+        return queryRepository.findAllByMember(member);
     }
 
     public Query createQuery(Long memberId, Integer schemeId, Query query) {
